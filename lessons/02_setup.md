@@ -1,12 +1,12 @@
 # Lesson 2: Setting Up Your Multi-Agent Research Lab
 
-Cool beans, time to roll up our sleeves and get our hands dirty, so to speak. Now that we have an understanding at a high level of what multi-agent systems are and why they're so cool, let's set up our own Pokémon research lab. Channel your inner Nurse Joy and let's get started with the set up.
+Cool beans, time to roll up our sleeves and get our hands dirty, so to speak. Now that we have an understanding at a high level of what multi-agent systems are and why they're so cool, let's set up our own Pokémon research lab. Channel your inner Nurse Joy, and let's get started with the setup.
 
 ## System Requirements
 
-Before we dive in, let's talk about what you'll need to run this bad boy. Since we're dealing with Large Language Models (LLMs) and they can be pretty compute-hungry creatures, we need to make sure your setup can handle the workload.
+Before we dive in, let's talk about what you'll need to run this bad boy. Since we're dealing with Large Language Models (LLMs), which can be computationally intensive, we need to ensure your setup can handle the workload.
 
-This is the wicked sh*itty part about working with LLMs locally, they are resource intensive. If you have a gaming PC or a nice coding workstation, you are in luck. However if you are like me and own a MacMini you may need a virtual machine in the cloud to run this project smoothly.
+This is the wicked sh*itty part about working with LLMs locally: they are resource-intensive. If you have a gaming PC or a nice coding workstation, you are in luck. However, if you are like me and own a MacMini, you may need a virtual machine in the cloud to run this project smoothly.
 
 ### Minimum Local Setup
 
@@ -20,7 +20,7 @@ If you're running this on your local machine, here's what I recommend:
 
 ### Recommended Cloud Options
 
-Now, if your local machine is feeling a bit wimpy or you want to scale things up, cloud is the way to go. Here are some solid AWS options that won't break the bank:
+Now, if your local machine is feeling a bit wimpy or you want to scale things up, the cloud is the way to go. Here are some solid AWS options that won't break the bank:
 
 #### AWS EC2 Instance Recommendations
 
@@ -52,7 +52,7 @@ Now, if your local machine is feeling a bit wimpy or you want to scale things up
 - **Cost**: ~$300-350/month
 - **Best for**: Production-level multi-agent systems
 
-> Note: Prices are based on mid-2024 AWS pricing and may vary by region. If you go with a different cloud provider (like GCP or Azure), look for similar instance types with comparable CPU and RAM specs.
+> Note: Prices are based on mid-2024 AWS pricing and may vary by region. If you opt for a different cloud provider (such as GCP or Azure), look for instance types with similar specifications, including comparable CPU and RAM configurations.
 
 #### Setting Up Your AWS Instance
 
@@ -62,41 +62,41 @@ If you decide to go the AWS route (which I totally recommend for this project), 
 
    - Choose Amazon Linux 2 or Ubuntu 20.04 LTS
    - Select your instance type from above
-   - Configure security group to allow SSH (port 22)
+   - Configure the security group to allow SSH (port 22)
 
 2. **Connect to Your Instance**:
 
-    ```bash
+ ```bash
     ssh -i your-key.pem ec2-user@your-instance-ip
-    ```
+ ```
 
 3. **Update System Packages**:
 
-   ```bash
+ ```bash
    sudo yum update -y  # Amazon Linux
    # OR
    sudo apt update && sudo apt upgrade -y  # Ubuntu
-   ```
+ ```
 
 4. **Install Python 3.8+**:
 
-   ```bash
+ ```bash
    # Amazon Linux
    sudo yum install python3 python3-pip git -y
    
    # Ubuntu  
    sudo apt install python3 python3-pip python3-venv git -y
-   ```
+ ```
 
-> Note: Depending on your instance type and OS choice, package installation commands may vary slightly. Please use those good ol' whitepages in Amazon or other related docs if you hit a snag.
+> Note: Depending on your instance type and OS choice, package installation commands may vary slightly. Please use the good old white pages in Amazon or other related documents if you hit a snag.
 
 ## Python Environment Setup
 
-Alright, let's get Python configured properly. I'll be showcasing a virtual environment setup using `venv`, which is included with Python 3. It's lightweight and perfect for our needs. You can also use `conda` or `virtualenv` if you prefer.
+Alright, let's get Python appropriately configured. I'll be showcasing a virtual environment setup using `venv`, which is included with Python 3. It's lightweight and perfect for our needs. You can also use `conda` or `virtualenv` if you prefer.
 
 ### Step 1: Make your Repository
 
-Whatever way you want to make your repo is up to you. If you just want to `git init` on a new folder, go for it. If you want to push your code to GitHub or another git hosting service, that's cool too.
+Whatever way you want to set up your repository is up to you. If you wish to `git init` in a new folder, go ahead. If you want to push your code to GitHub or another Git hosting service, that's also fine.
 
 First things first, create your project repo:
 
@@ -106,7 +106,7 @@ mkdir pokemon-research-team
 cd pokemon-research-team
 git init
 
-# Use GitHub to create a repo then clone it down
+# Use GitHub to create a repo, then clone it down
 git clone https://github.com/your-username/pokemon-research-team.git
 cd pokemon-research-team
 ```
@@ -176,7 +176,7 @@ Now, let me break down what we just installed and why each piece matters:
 - **Matplotlib** (`matplotlib>=3.7.0`): Core plotting library
 - **Seaborn** (`seaborn>=0.12.0`): Makes beautiful statistical visualizations
 
-If everything installed correctly, you should see something like "Successfully installed..." with a bunch of package names.
+If everything is installed correctly, you should see a message similar to "Successfully installed..." along with a list of package names.
 
 **Pro Tip**: Now that you've installed everything, let's create a `requirements.txt` file so you (and others) can easily recreate this environment later:
 
@@ -218,7 +218,7 @@ pip install pyautogen requests>=2.31.0 pandas>=2.0.0 numpy>=1.24.0 matplotlib>=3
 
 ## Project Structure Setup
 
-Now that we have our dependencies sorted, let's make sure our project structure is set up correctly. Think of this as organizing our research lab so everything has its proper place.
+Now that we have our dependencies in order, let's ensure our project structure is set up correctly. Please think of this as organizing our research lab so everything has its proper place.
 
 ### Understanding the File Structure
 
@@ -250,7 +250,7 @@ pokemon-research-team/
 │   └── fire_type_analysis.py   # Complete Fire-type research demo
 │
 └── data/                       # Generated outputs and cache
-    └── visualizations/         # Charts, graphs, and reports go here
+ └── visualizations/         # Charts, graphs, and reports go here
 ```
 
 ### Verifying Your Setup
@@ -289,7 +289,7 @@ echo "Directory permissions: OK"
 
 ## API Keys and Configuration
 
-Here's where things get a bit more serious. Our agents need to talk to external services, and that means we need some API keys.
+Here's where things get a bit more serious. Our agents need to communicate with external services, and that requires us to obtain some API keys.
 
 ### OpenAI API Key (Required for Full Functionality)
 
@@ -298,28 +298,28 @@ The AutoGen framework can use various LLM providers, but OpenAI is the most stra
 1. **Get Your API Key**:
    - Head over to [OpenAI's website](https://openai.com/api/)
    - Sign up or log in
-   - Navigate to API Keys section
+   - Navigate to the API Keys section
    - Create a new API key
 
 2. **Set Up Environment Variables**:
 
-   ```bash
+ ```bash
    # On macOS/Linux - add to your ~/.bashrc or ~/.zshrc
    export OPENAI_API_KEY="your-actual-api-key-here"
    
    # On Windows - use Command Prompt
    setx OPENAI_API_KEY "your-actual-api-key-here"
-   ```
+ ```
 
 3. **Verify It's Working**:
 
-   ```bash
+ ```bash
    echo $OPENAI_API_KEY  # Should show your key (first few chars)
-   ```
+ ```
 
 ### Alternative: Local LLM Setup (Advanced)
 
-If you don't want to use OpenAI or want to keep everything local, you can configure AutoGen to use local models like Ollama. This is more complex but totally doable:
+If you don't want to use OpenAI or prefer to keep everything local, you can configure AutoGen to use local models, such as Ollama. This is more complex but totally doable:
 
 ```bash
 # Install Ollama (macOS)
@@ -333,7 +333,7 @@ ollama pull llama2
 
 ### PokéAPI (Free - No Key Required!)
 
-Good news! The PokéAPI is completely free and doesn't require any API keys. It's one of the most developer-friendly APIs out there. Our system will automatically handle rate limiting and caching to be respectful of their servers.
+Good news! The PokéAPI is entirely free and doesn't require any API keys. It's one of the most developer-friendly APIs out there. Our system will automatically handle rate limiting and caching to be respectful of their servers.
 
 ## Setup Verification Checklist
 
@@ -346,7 +346,7 @@ Before moving on to the next lesson, let's make sure you've got everything sorte
 
 If you can check all those boxes, you're absolutely ready to start building your multi-agent system!
 
-## 🎯 Performance Optimization Tips
+## Performance Optimization Tips
 
 Since we're dealing with LLMs and potentially multiple agents running simultaneously, here are some tips to keep things running smoothly:
 

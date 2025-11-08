@@ -1,6 +1,6 @@
 # Lesson 3: Building Your AI Agents
 
-We are set up and ready to go. If you are building your own LLMs agents, you will have to have them ready before continuing with this lesson.
+We are set up and ready to go. If you are building your own LLM agents, you will have to have them prepared before continuing with this lesson.
 
 By the end of this lesson, you'll have:
 
@@ -11,9 +11,9 @@ By the end of this lesson, you'll have:
 
 ## Understanding Agent Architecture
 
-Before we start coding, let's talk about what makes a good AI agent. I want to go back to the analogy of the orchestra here. Each agent is like a musician with their own instrument and sheet music. They need to know their part, how to play it well, and when to come in and out of the performance. The conductor (in our case, the group chat manager) ensures everyone is in sync and working towards the same musical piece (the research goal).
+Before we start coding, let's talk about what makes a good AI agent. I want to revisit the orchestra analogy here. Each agent is like a musician with their own instrument and sheet music. They need to know their part, how to play it well, and when to enter and exit the performance. The conductor (in our case, the group chat manager) ensures everyone is in sync and working towards the same musical piece (the research goal).
 
-Each agent has a task that it is specialized for, and they need to communicate effectively with each other to achieve the overall objective. Just like in an orchestra, if one musician is out of sync, it can throw off the entire performance. The same goes for our agents, they need to work together harmoniously.
+Each agent has a task for which it is specialized, and they need to communicate effectively with one another to achieve the overall objective. Just as in an orchestra, if one musician is out of sync, it can disrupt the entire performance. The same applies to our agents; they need to work together harmoniously.
 
 ### Core Agent Components
 
@@ -28,7 +28,7 @@ It's like giving each agent a sheet of music to play from, ensuring they know th
 
 ## Step 1: Creating the Foundation Files
 
-First, let's make sure we have the right file structure. You should already have this from the setup lesson, but let's double-check:
+First, let's ensure we have the correct file structure. You should already have this from the setup lesson, but let's double-check:
 
 ```bash
 # Make sure you're in your project directory
@@ -74,71 +74,71 @@ Professor Oak is our team leader. He takes big research questions and breaks the
 ```python
 class ProfessorOakAgent(AssistantAgent):
     """
-    Professor Oak acts as the research coordinator.
-    He receives research goals and breaks them down into specific tasks for researcher agents.
-    """
+ Professor Oak acts as the research coordinator.
+ He receives research goals and breaks them down into specific tasks for researcher agents.
+ """
 
     def __init__(self, name: str = "Professor_Oak"):
-        system_message = """
-        You are Professor Oak, a renowned Pokémon researcher and coordinator.
+ system_message = """
+ You are Professor Oak, a renowned Pokémon researcher and coordinator.
         
-        Your role is to:
-        1. Receive high-level research goals from users
-        2. Break down complex research tasks into specific, actionable subtasks
-        3. Assign tasks to researcher agents
-        4. Coordinate the research process
-        5. Ensure comprehensive analysis is completed
+ Your role is to:
+ 1. Receive high-level research goals from users
+ 2. Break down complex research tasks into specific, actionable subtasks
+ 3. Assign tasks to researcher agents
+ 4. Coordinate the research process
+ 5. Ensure comprehensive analysis is completed
         
-        When given a research goal like "analyze Fire-type Pokémon weaknesses", you should:
-        - Define what specific data needs to be collected
-        - Specify what analysis should be performed
-        - Request appropriate visualizations
-        - Coordinate between researcher and reporter agents
+ When given a research goal like "analyze Fire-type Pokémon weaknesses", you should:
+ - Define what specific data needs to be collected
+ - Specify what analysis should be performed
+ - Request appropriate visualizations
+ - Coordinate between the researcher and reporter agents
         
-        Always be thorough and scientific in your approach.
-        """
+ Always approach your work thoroughly and scientifically.
+ """
 
         super().__init__(
             name=name,
             system_message=system_message,
             llm_config={
                 "config_list": [
-                    {
+ {
                         "model": "gpt-4",
                         "api_key": os.getenv("OPENAI_API_KEY", "your-api-key-here")
-                    }
-                ],
+ }
+ ],
                 "temperature": 0.1
-            }
-        )
+ }
+ )
 ```
 
 **Key Points About This Code:**
 
 - The `system_message` is like giving Professor Oak his job description and personality
 - `llm_config` tells AutoGen how to connect to the AI model (GPT-4 in this case)
-- `temperature: 0.1` makes responses more consistent and less creative (good for coordination)
+- `temperature: 0.1` makes responses more consistent and less creative (suitable for coordination)
 - `os.getenv()` safely reads the API key from environment variables
 
 ### Adding Professor Oak's Special Methods
 
-Now let's give Professor Oak a special ability, creating research plans:
+Now, let's give Professor Oak a special ability, creating research plans:
 
 ```python
     def create_research_plan(self, research_goal: str) -> Dict[str, Any]:
         """Create a structured research plan for the given goal."""
-        plan_prompt = f"""
-        Create a detailed research plan for: {research_goal}
+ plan_prompt = f"""
+ Create a detailed research plan for: {research_goal}
         
-        Please structure your plan with:
-        1. Research objectives
-        2. Data collection requirements
-        3. Analysis steps
-        4. Expected deliverables
-        5. Success criteria
+ Please structure your plan with:
+ 1. Research objectives
+ 2. Data collection requirements
+ 3. Analysis steps
+ 4. Expected deliverables
+ 5. Success criteria
         
-        Make it specific and actionable for researcher agents.
-        """
+ Make it specific and actionable for researcher agents.
+ """
  
         # This would typically use the LLM to generate the plan
         # For now, we'll return a structured template
@@ -150,26 +150,26 @@ Now let's give Professor Oak a special ability, creating research plans:
                     "Get detailed stats for each Fire-type Pokémon",
                     "Collect type effectiveness data",
                     "Gather weakness/resistance information"
-                ],
+ ],
                 "analysis_steps": [
                     "Calculate average stats for Fire-type Pokémon",
                     "Identify most common weaknesses",
                     "Analyze defensive capabilities",
                     "Compare with other types"
-                ],
+ ],
                 "deliverables": [
                     "Statistical summary report",
                     "Weakness frequency chart",
                     "Comparative analysis visualization",
                     "Strategic recommendations"
-                ],
+ ],
                 "success_criteria": [
                     "Complete data for at least 10 Fire-type Pokémon",
                     "Clear identification of top 3 weaknesses",
                     "Visual representations of findings",
                     "Actionable strategic insights"
-                ]
-            }
+ ]
+ }
         else:
             return {
                 "objective": f"Research and analyze: {research_goal}",
@@ -177,13 +177,13 @@ Now let's give Professor Oak a special ability, creating research plans:
                 "analysis_steps": ["Perform statistical analysis"],
                 "deliverables": ["Generate comprehensive report"],
                 "success_criteria": ["Complete analysis with insights"]
-            }
+ }
 ```
 
 **Why This Method Matters:**
 
 - It gives Professor Oak a way to create structured plans
-- Right now it uses templates, but you could enhance it to use the LLM for dynamic planning
+- Right now, it uses templates, but you could enhance it to use the LLM for dynamic planning
 - The return format is consistent, making it easy for other agents to understand
 
 ### Building the Researcher Agent
@@ -193,42 +193,42 @@ Next up is our data specialist. This agent is all about collecting and analyzing
 ```python
 class ResearcherAgent(AssistantAgent):
     """
-    Researcher Agent - Performs data collection and analysis.
-    """
+ Researcher Agent - Performs data collection and analysis.
+ """
 
     def __init__(self, name: str = "Researcher"):
-        system_message = """
-        You are a dedicated Pokémon researcher specializing in data collection and analysis.
+ system_message = """
+ You are a dedicated Pokémon researcher specializing in data collection and analysis.
         
-        Your role is to:
-        1. Execute specific research tasks assigned by Professor Oak
-        2. Collect data from the PokéAPI and other sources
-        3. Perform statistical analysis on Pokémon data
-        4. Use visualization tools when appropriate
-        5. Report findings clearly and accurately
+ Your role is to:
+ 1. Execute specific research tasks assigned by Professor Oak
+ 2. Collect data from the PokéAPI and other sources
+ 3. Perform statistical analysis on Pokémon data
+ 4. Use visualization tools when appropriate
+ 5. Report findings clearly and accurately
         
-        You have access to:
-        - PokéAPI integration tools
-        - Statistical analysis capabilities
-        - Data visualization functions
+ You have access to:
+ - PokéAPI integration tools
+ - Statistical analysis capabilities
+ - Data visualization functions
         
-        Always be precise and thorough in your data collection and analysis.
-        Verify your findings and note any limitations in the data.
-        """
+ Always be precise and thorough in your data collection and analysis.
+ Verify your findings and note any limitations in the data.
+ """
         
         super().__init__(
             name=name,
             system_message=system_message,
             llm_config={
                 "config_list": [
-                    {
+ {
                         "model": "gpt-4",
                         "api_key": os.getenv("OPENAI_API_KEY", "your-api-key-here")
-                    }
-                ],
+ }
+ ],
                 "temperature": 0.1
-            }
-        )
+ }
+ )
 ```
 
 **Notice the Differences:**
@@ -238,48 +238,48 @@ class ResearcherAgent(AssistantAgent):
 
 ### Creating the Reporter Agent
 
-Finally, our communication specialist who turns raw data into beautiful reports:
+Finally, our communication specialist, who turns raw data into beautiful reports:
 
 ```python
 class ReporterAgent(AssistantAgent):
     """
-    Reporter Agent - Synthesizes findings into comprehensive reports.
-    """
+ Reporter Agent - Synthesizes findings into comprehensive reports.
+ """
 
     def __init__(self, name: str = "Reporter"):
-        system_message = """
-        You are a scientific reporter specializing in Pokémon research communication.
+ system_message = """
+ You are a scientific reporter specializing in communicating Pokémon research.
         
-        Your role is to:
-        1. Receive research findings from researcher agents
-        2. Synthesize multiple data sources into coherent reports
-        3. Create clear, professional summaries
-        4. Highlight key insights and implications
-        5. Present findings in an accessible format
+ Your role is to:
+ 1. Receive research findings from researcher agents
+ 2. Synthesize multiple data sources into coherent reports
+ 3. Create clear, professional summaries
+ 4. Highlight key insights and implications
+ 5. Present findings in an accessible format
         
-        Your reports should include:
-        - Executive summary of key findings
-        - Detailed analysis results
-        - Visual elements and charts
-        - Strategic recommendations
-        - Areas for further research
+ Your reports should include:
+ - Executive summary of key findings
+ - Detailed analysis results
+ - Visual elements and charts
+ - Strategic recommendations
+ - Areas for further research
         
-        Write clearly and professionally, making complex data accessible to various audiences.
-        """
+ Write clearly and professionally, making complex data accessible to various audiences.
+ """
 
         super().__init__(
             name=name,
             system_message=system_message,
             llm_config={
                 "config_list": [
-                    {
+ {
                         "model": "gpt-4",
                         "api_key": os.getenv("OPENAI_API_KEY", "your-api-key-here")
-                    }
-                ],
+ }
+ ],
                 "temperature": 0.3  # Slightly higher for more creative reporting
-            }
-        )
+ }
+ )
 ```
 
 ### Adding the Reporter's Special Report Generation
@@ -289,40 +289,40 @@ Let's give the Reporter agent a method to create structured reports:
 ```python
     def generate_report(self, research_data: Dict[str, Any]) -> str:
         """Generate a comprehensive research report."""
-        report_sections = []
+ report_sections = []
 
         # Executive Summary
-        report_sections.append("# Pokémon Research Report")
-        report_sections.append("## Executive Summary")
+ report_sections.append("# Pokémon Research Report")
+ report_sections.append("## Executive Summary")
 
         if 'weakness_analysis' in research_data:
-            weakness_data = research_data['weakness_analysis']
-            report_sections.append(f"Analysis of {weakness_data.get('type', 'Unknown')} type Pokémon reveals significant strategic insights.")
+ weakness_data = research_data['weakness_analysis']
+ report_sections.append(f"Analysis of {weakness_data.get('type', 'Unknown')} type Pokémon reveals significant strategic insights.")
 
         # Methodology
-        report_sections.append("## Methodology")
-        report_sections.append("Data collected via PokéAPI with statistical analysis performed on type effectiveness and base stats.")
+ report_sections.append("## Methodology")
+ report_sections.append("Data collected via PokéAPI with statistical analysis performed on type effectiveness and base stats.")
 
         # Key Findings
-        report_sections.append("## Key Findings")
+ report_sections.append("## Key Findings")
 
         if 'weakness_analysis' in research_data:
-            weakness_data = research_data['weakness_analysis']
-            analyzed_count = weakness_data.get('analyzed_pokemon_count', 0)
-            report_sections.append(f"- Analyzed {analyzed_count} Pokémon specimens")
+ weakness_data = research_data['weakness_analysis']
+ analyzed_count = weakness_data.get('analyzed_pokemon_count', 0)
+ report_sections.append(f"- Analyzed {analyzed_count} Pokémon specimens")
             
             if 'most_common_weakness' in weakness_data and weakness_data['most_common_weakness']:
-                weakness_type, percentage = weakness_data['most_common_weakness']
-                report_sections.append(f"- Most common weakness: {weakness_type.title()} type ({percentage:.1f}% of analyzed Pokémon)")
+ weakness_type, percentage = weakness_data['most_common_weakness']
+ report_sections.append(f"- Most common weakness: {weakness_type.title()} type ({percentage:.1f}% of analyzed Pokémon)")
 
             if 'weakness_percentages' in weakness_data:
-                report_sections.append("- Weakness distribution:")
+ report_sections.append("- Weakness distribution:")
                 for weakness, percentage in sorted(weakness_data['weakness_percentages'].items(), key=lambda x: x[1], reverse=True):
-                    report_sections.append(f"  - {weakness.title()}: {percentage:.1f}%")
+ report_sections.append(f"  - {weakness.title()}: {percentage:.1f}%")
 
         # Recommendations
-        report_sections.append("## Strategic Recommendations")
-        report_sections.append("Based on the analysis, trainers should consider type coverage and defensive strategies when building teams.")
+ report_sections.append("## Strategic Recommendations")
+ report_sections.append("Based on the analysis, trainers should consider type coverage and defensive strategies when building teams.")
 
         return "\n\n".join(report_sections)
 ```
@@ -336,7 +336,7 @@ Let's give the Reporter agent a method to create structured reports:
 
 ## Step 3: Building the Coordinator System
 
-Now we need to create the system that makes our agents work together. Create a new file `src/agents/coordinator.py`:
+Now we need to create a system that enables our agents to work together effectively. Create a new file `src/agents/coordinator.py`:
 
 ### Setting Up the Coordinator Imports
 
@@ -376,27 +376,27 @@ class ResearchCoordinator:
             code_execution_config={"work_dir": "data", "use_docker": False},
             human_input_mode="NEVER",
             max_consecutive_auto_reply=10
-        )
+ )
 
         # Create group chat
         self.group_chat = GroupChat(
             agents=[self.user_proxy, self.professor_oak, self.researcher, self.reporter],
             messages=[],
             max_round=20
-        )
+ )
 
         self.group_chat_manager = GroupChatManager(
             groupchat=self.group_chat,
             llm_config={
                 "config_list": [
-                    {
+ {
                         "model": "gpt-4",
                         "api_key": os.getenv("OPENAI_API_KEY", "your-api-key-here")
-                    }
-                ],
+ }
+ ],
                 "temperature": 0.1
-            }
-        )
+ }
+ )
 ```
 
 **Key Configuration Choices:**
@@ -413,26 +413,26 @@ class ResearchCoordinator:
         """Start a research project with the given goal."""
 
         # Initialize the research conversation
-        initial_message = f"""
-        New research project initiated: {research_goal}
+ initial_message = f"""
+ New research project initiated: {research_goal}
         
-        Professor Oak, please create a research plan and coordinate with the team.
-        Researcher, be ready to collect and analyze data.
-        Reporter, prepare to synthesize findings into a comprehensive report.
-        """
+ Professor Oak, please create a research plan and coordinate with the team.
+ Researcher, be ready to collect and analyze data.
+ Reporter, prepare to synthesize findings into a comprehensive report.
+ """
 
         # Start the group chat
         self.user_proxy.initiate_chat(
             self.group_chat_manager,
             message=initial_message
-        )
+ )
 
         # Return the conversation history and any results
         return {
             "research_goal": research_goal,
             "conversation_history": self.group_chat.messages,
             "status": "completed"
-        }
+ }
 
     def get_research_plan(self, research_goal: str) -> Dict[str, Any]:
         """Get a research plan from Professor Oak without full execution."""
@@ -441,8 +441,8 @@ class ResearchCoordinator:
 
 **Method Purposes:**
 
-- `start_research_project()` kicks off a full multi-agent conversation
-- `get_research_plan()` gets just the planning phase without full execution
+- `start_research_project()` kicks off a whole multi-agent conversation
+- `get_research_plan()` gets just the planning phase without complete execution
 - Both return structured data that can be used by other parts of your application
 
 ## Step 4: Testing Your Agents
@@ -461,10 +461,10 @@ from agents.coordinator import ResearchCoordinator
 def test_basic_agent_creation():
     """Test that we can create all our agents without errors."""
     try:
-        oak = ProfessorOakAgent()
-        researcher = ResearcherAgent()
-        reporter = ReporterAgent()
-        coordinator = ResearchCoordinator()
+ oak = ProfessorOakAgent()
+ researcher = ResearcherAgent()
+ reporter = ReporterAgent()
+ coordinator = ResearchCoordinator()
         
         print("✅ All agents created successfully!")
         return True
@@ -474,8 +474,8 @@ def test_basic_agent_creation():
 
 def test_research_plan():
     """Test Professor Oak's research planning ability."""
-    oak = ProfessorOakAgent()
-    plan = oak.create_research_plan("analyze Fire-type Pokémon weaknesses")
+ oak = ProfessorOakAgent()
+ plan = oak.create_research_plan("analyze Fire-type Pokémon weaknesses")
     
     print("🔬 Research Plan Generated:")
     print(f"Objective: {plan['objective']}")
@@ -485,8 +485,8 @@ def test_research_plan():
 
 if __name__ == "__main__":
     print("🧪 Testing Agent System...")
-    test_basic_agent_creation()
-    test_research_plan()
+ test_basic_agent_creation()
+ test_research_plan()
 ```
 
 Run this test:
@@ -497,7 +497,7 @@ python test_agents.py
 
 ## Step 5: Understanding Agent Communication
 
-Now let's talk about how these agents actually talk to each other. AutoGen uses a conversation-based approach where agents take turns responding to messages.
+Now, let's discuss how these agents communicate with each other. AutoGen uses a conversation-based approach where agents take turns responding to messages.
 
 ### The Conversation Flow
 
@@ -572,12 +572,12 @@ Make your agents more flexible by generating system messages based on the task:
 
 ```python
 def create_dynamic_system_message(self, research_focus: str) -> str:
-    base_message = "You are a Pokémon researcher..."
+ base_message = "You are a Pokémon researcher..."
     
     if "competitive" in research_focus:
-        base_message += "\nFocus on battle strategies and team synergy."
+ base_message += "\nFocus on battle strategies and team synergy."
     elif "evolution" in research_focus:
-        base_message += "\nEmphasize evolution patterns and family relationships."
+ base_message += "\nEmphasize evolution patterns and family relationships."
         
     return base_message
 ```
@@ -617,9 +617,9 @@ if not api_key:
 system_message = """
 When passing data to other agents, always use this format:
 {
-    "type": "analysis_result",
-    "data": {...},
-    "timestamp": "2024-01-01T00:00:00Z"
+ "type": "analysis_result",
+ "data": {...},
+ "timestamp": "2024-01-01T00:00:00Z"
 }
 """
 ```

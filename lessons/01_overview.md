@@ -1,17 +1,17 @@
-# 🎓 Lesson Overview: Multi-Agent AI Research Systems
+# Lesson Overview: Multi-Agent AI Research Systems
 
-Okie dokie artichokies, gather around as I dive into MAS or multi-agent systems, Pokemon theme of course. This is a hands on lesson / guide on how to build a multi-agent AI research system. What that means and what is included to make one.
+Okie dokie artichokies, gather around as I dive into MAS or multi-agent systems, Pokémon theme of course. This is a hands-on lesson/guide on how to build a multi-agent AI research system. What does that mean, and what is included to make one?
 
-After this lesson you should:
+After this lesson, you should:
 
 - Explain what multi-agent systems are and their benefits
 - Set up a basic multi-agent system using the AutoGen framework
 - Integrate external APIs for real-time data collection
 - Design a data pipeline for analysis and visualization
-- Implement tool calling for agents to use external functions
+- Implement a tool for agents to use external functions
 - Facilitate collaboration between agents to solve complex problems
 
-While this lesson uses Pokemon as the main theme, the concepts and techniques coverd can be applied to real life scenarios like market research, scientific discovery, and data analysis. Take notes of the general principles and adapt them to your own projects.
+While this lesson uses Pokémon as its central theme, the concepts and techniques covered can be applied to real-life scenarios, such as market research, scientific discovery, and data analysis. Take notes of the general principles and adapt them to your own projects.
 
 ## MAS - Multi-Agent Systems
 
@@ -19,7 +19,7 @@ So what is this multi-agent system thing that you have clicked into to read abou
 
 Let's dive into some terms that we should know:
 
-- **Agent**: An autonomous entity that can perceive its environment, make decisions, and take actions to achieve specific goals. This would be a single musician in our orchestra. They play their instrument well and depending on the music (goal), they can work solo or in a group.
+- **Agent**: An autonomous entity that can perceive its environment, make decisions, and take actions to achieve specific goals. This would be a single musician in our orchestra. They play their instrument well, and depending on the music (goal), they can work solo or in a group.
 - **Multi-Agent System (MAS)**: A system composed of multiple interacting agents that work together to achieve common or individual goals. This is our entire orchestra, where each musician (agent) contributes to the overall performance (goal).
 
 ### Use Cases for Multi-Agent Systems
@@ -35,7 +35,7 @@ Multi-agent systems can be applied in various domains, including:
 - **Supply Chain Management**: Agents can optimize logistics, inventory management, and demand forecasting.
 - **Smart Cities**: Agents can manage traffic flow, energy consumption, and public services to improve urban living.
 
-Honestly, the possibilities are endless. Multi-agent systems can be tailored to fit a wide range of applications, making them a powerful tool for solving complex problems. My rule of thumb is if you have a problem that can be broken down into smaller, manageable parts that can be handled by specialized entities, then a multi-agent system might be a good fit. Being a developer that has worked with microservices, I see a lot of similarities between MAS and microservices architecture. Both involve breaking down complex systems into smaller, independent components that can work together to achieve a common goal.
+Honestly, the possibilities are endless. Multi-agent systems can be tailored to fit a wide range of applications, making them a powerful tool for solving complex problems. If you have a problem that can be broken down into smaller, manageable parts that can be handled by specialized entities, then a multi-agent system might be a good fit. As a developer who has worked with microservices, I see many similarities between MAS and microservices architecture. Both involve breaking down complex systems into smaller, independent components that can work together to achieve a common goal.
 
 ### Benefits and Drawbacks of Multi-Agent Systems
 
@@ -56,7 +56,7 @@ Honestly, the possibilities are endless. Multi-agent systems can be tailored to 
 - **Debugging Difficulty**: Identifying and resolving issues in a multi-agent system can be more challenging due to the interactions between agents.
 - **Security Concerns**: The distributed nature of MAS can introduce security vulnerabilities, as agents may need to share sensitive information.
 
-If you are at all familiar with microservices architecture, many of these benefits and drawbacks will sound familiar. Both MAS and microservices involve breaking down complex systems into smaller, independent components that can work together to achieve a common goal.
+If you are familiar with microservices architecture, many of these benefits and drawbacks will likely sound familiar. Both MAS and microservices involve breaking down complex systems into smaller, independent components that can work together to achieve a common goal.
 
 We can call on one of our old friends here from OOP, the SOLID principles. Specifically, the "Single Responsibility Principle" (SRP) is highly relevant to multi-agent systems. SRP states that a class (or agent, in this case) should have only one reason to change, meaning it should focus on a single responsibility or task. By designing agents with specific roles and responsibilities, we can create a more modular and maintainable multi-agent system.
 
