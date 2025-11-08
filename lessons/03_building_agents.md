@@ -680,4 +680,4 @@ print(plan)
 
 Woot woot, you've just built the brains of your Pokémon research operation! These agents are ready to tackle any research challenge you throw at them. Time to hook them up to some real data and watch the magic happen!
 
-Let's venture forth in the next lesson here: [Lesson 4: Integrating Data and Visualization](lessons/04_integrating_data_and_visualization.md)
+Let's venture forth in the next lesson here: [Lesson 4: Integrating Data and Visualization](04_integrating_data_and_visualization.md)

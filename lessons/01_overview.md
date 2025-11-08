@@ -76,4 +76,4 @@ Let's dive into creating these agents and seeing how we can connect them to form
 
 ## Next Steps
 
-Continue on to [Lesson 2: Setting Up the Multi-Agent System](lessons/02_setup.md) to get hands-on experience in building your own multi-agent AI research system using the AutoGen framework!
+Continue on to [Lesson 2: Setting Up the Multi-Agent System](02_setup.md) to get hands-on experience in building your own multi-agent AI research system using the AutoGen framework!

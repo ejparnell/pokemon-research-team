@@ -371,4 +371,4 @@ Since we're dealing with LLMs and potentially multiple agents running simultaneo
 
 ## Next Steps: Time to Code
 
-Ready to bring your agents to life? Let's dive into [Lesson 3: Building Your First Agent](lessons/03_building_agents.md) and start creating some AI magic.
+Ready to bring your agents to life? Let's dive into [Lesson 3: Building Your First Agent](03_building_agents.md) and start creating some AI magic.
